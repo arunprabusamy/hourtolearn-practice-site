@@ -1,5 +1,15 @@
 /* Forms page - page-specific styles */
 
+#support-form fieldset.form-group {
+  border: none;
+  padding: 0;
+}
+
+#support-form fieldset.form-group legend {
+  padding: 0;
+  margin-bottom: 6px;
+}
+
 #support-form .form-group:last-child {
   margin-bottom: 0;
 }

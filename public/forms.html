@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forms · TestCraft Practice Site</title>
+  <title>Forms · HourToLearn Practice Site</title>
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/forms.css" />
 </head>
@@ -22,20 +22,20 @@
           <h2 class="card-title">Support request</h2>
           <p class="card-subtitle">Tell us who you are and what you need help with.</p>
 
-          <div class="alert alert-error" data-testid="form-error-message" id="form-error-message" hidden></div>
-          <div class="alert alert-success" data-testid="form-success-message" id="form-success-message" hidden>Form submitted successfully</div>
+          <div class="alert alert-error" role="alert" data-testid="form-error-message" id="form-error-message" hidden></div>
+          <div class="alert alert-success" role="status" data-testid="form-success-message" id="form-success-message" hidden>Form submitted successfully</div>
 
           <form id="support-form" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="full-name">Full name</label>
-                <input class="form-input" type="text" id="full-name" name="fullName" data-testid="full-name-input" />
+                <input class="form-input" type="text" id="full-name" name="fullName" data-testid="full-name-input" aria-describedby="full-name-error" />
                 <p class="form-error" data-testid="full-name-error" id="full-name-error" hidden>Full name is required.</p>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-input" type="email" id="email" name="email" data-testid="email-input" />
+                <input class="form-input" type="email" id="email" name="email" data-testid="email-input" aria-describedby="email-error" />
                 <p class="form-error" data-testid="email-error" id="email-error" hidden>A valid email is required.</p>
               </div>
             </div>
@@ -43,14 +43,14 @@
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="password">Password</label>
-                <input class="form-input" type="password" id="password" name="password" data-testid="password-input" />
-                <p class="form-hint">At least 8 characters.</p>
+                <input class="form-input" type="password" id="password" name="password" data-testid="password-input" aria-describedby="password-hint password-error" />
+                <p class="form-hint" id="password-hint">At least 8 characters.</p>
                 <p class="form-error" data-testid="password-error" id="password-error" hidden>Password must be at least 8 characters.</p>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="topic">Topic</label>
-                <select class="form-select" id="topic" name="topic" data-testid="topic-select">
+                <select class="form-select" id="topic" name="topic" data-testid="topic-select" aria-describedby="topic-error">
                   <option value="">Select a topic&hellip;</option>
                   <option value="billing">Billing</option>
                   <option value="technical">Technical issue</option>
@@ -63,12 +63,12 @@
 
             <div class="form-group">
               <label class="form-label" for="message">Message</label>
-              <textarea class="form-textarea" id="message" name="message" rows="4" data-testid="message-textarea"></textarea>
+              <textarea class="form-textarea" id="message" name="message" rows="4" data-testid="message-textarea" aria-describedby="message-error"></textarea>
               <p class="form-error" data-testid="message-error" id="message-error" hidden>Please describe your issue.</p>
             </div>
 
-            <div class="form-group">
-              <span class="form-label">Contact preferences</span>
+            <fieldset class="form-group">
+              <legend class="form-label">Contact preferences</legend>
               <div class="form-checkbox-row">
                 <input type="checkbox" id="contact-email" name="contactPreferences" value="email" data-testid="contact-email-checkbox" />
                 <label for="contact-email">Email me updates</label>
@@ -81,10 +81,10 @@
                 <input type="checkbox" id="contact-phone" name="contactPreferences" value="phone" data-testid="contact-phone-checkbox" />
                 <label for="contact-phone">Call me about this</label>
               </div>
-            </div>
+            </fieldset>
 
-            <div class="form-group">
-              <span class="form-label">How urgent is this?</span>
+            <fieldset class="form-group" aria-describedby="urgency-error">
+              <legend class="form-label">How urgent is this?</legend>
               <div class="form-radio-row">
                 <input type="radio" id="urgency-low" name="urgency" value="low" data-testid="urgency-low-radio" />
                 <label for="urgency-low">Low</label>
@@ -98,7 +98,7 @@
                 <label for="urgency-high">High</label>
               </div>
               <p class="form-error" data-testid="urgency-error" id="urgency-error" hidden>Please select an urgency level.</p>
-            </div>
+            </fieldset>
 
             <div class="form-group">
               <button type="submit" class="btn" data-testid="submit-button">Submit request</button>

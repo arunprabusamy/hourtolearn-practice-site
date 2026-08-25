@@ -25,7 +25,7 @@ const users = FIRST_NAMES.map((first, i) => {
   return {
     id: i + 1,
     name: `${first} ${last}`,
-    email: `${first.toLowerCase()}.${last.toLowerCase()}@testcraft.dev`,
+    email: `${first.toLowerCase()}.${last.toLowerCase()}@hourtolearn.dev`,
     role: ROLES[i % ROLES.length],
     age: 22 + (i % 30)
   };
@@ -120,5 +120,5 @@ app.post('/upload', upload.array('files'), (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`TestCraft Practice Site running at http://localhost:${PORT}`);
+  console.log(`HourToLearn Practice Site running at http://localhost:${PORT}`);
 });
