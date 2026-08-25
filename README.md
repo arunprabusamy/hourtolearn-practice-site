@@ -1,4 +1,4 @@
-# TestCraft Practice Site
+# HourToLearn Practice Site
 
 A small Node.js/Express web app built for practicing Playwright automation. No frontend
 framework, no build step — plain HTML, CSS and vanilla JavaScript served by a single
