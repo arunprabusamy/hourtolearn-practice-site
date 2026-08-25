@@ -1,0 +1,9 @@
+/* Forms page - page-specific styles */
+
+#support-form .form-group:last-child {
+  margin-bottom: 0;
+}
+
+#support-form button + button {
+  margin-left: 8px;
+}

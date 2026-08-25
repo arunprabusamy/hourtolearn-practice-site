@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Content · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/dynamic-content.css" />
+</head>
+<body data-page="dynamic-content">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Dynamic Content</h1>
+        <p class="page-description">
+          Elements that appear, load over the network, or disappear on a delay — good
+          targets for auto-waiting and network practice.
+        </p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Show after delay</h2>
+          <p class="card-subtitle">
+            Reveals a hidden element about two seconds after you click the button.
+          </p>
+          <button class="btn" type="button" data-testid="delay-show-btn">Show after delay</button>
+          <p class="delayed-element" data-testid="delayed-element" hidden>
+            This element appeared after a short delay.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Load items from server</h2>
+          <p class="card-subtitle">
+            Calls <code>GET /api/items</code> (a real network request with a built-in
+            server delay) and renders the response.
+          </p>
+          <button class="btn" type="button" data-testid="load-items-btn">Load items</button>
+          <p class="items-loading" data-testid="items-loading" hidden>Loading items...</p>
+          <ul class="dynamic-item-list" data-testid="dynamic-item-list"></ul>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Disappearing element</h2>
+          <p class="card-subtitle">
+            Shows a message that removes itself from the DOM about three seconds later.
+          </p>
+          <button class="btn" type="button" data-testid="disappear-btn">Show message</button>
+          <div class="disappearing-slot"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/dynamic-content.js"></script>
+</body>
+</html>

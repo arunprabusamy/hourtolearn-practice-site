@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/table.css" />
+</head>
+<body data-page="table">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Table</h1>
+        <p class="page-description">
+          Search, sort, select and paginate a server-backed list of users.
+        </p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Users</h2>
+          <p class="card-subtitle">
+            Data is fetched from <code>GET /api/users</code> with search, sort and pagination
+            query params.
+          </p>
+
+          <div class="table-toolbar">
+            <div class="form-group table-search-group">
+              <label class="form-label" for="table-search-input">Search users</label>
+              <input
+                class="form-input"
+                type="search"
+                id="table-search-input"
+                data-testid="table-search-input"
+                placeholder="Search by name, email or role..."
+              />
+            </div>
+            <button
+              class="btn btn-danger"
+              type="button"
+              data-testid="table-delete-selected"
+              disabled
+            >
+              Delete selected
+            </button>
+          </div>
+
+          <div class="table-scroll">
+            <table class="table" data-testid="users-table">
+              <thead>
+                <tr>
+                  <th class="cell-select">
+                    <input
+                      type="checkbox"
+                      data-testid="table-select-all"
+                      aria-label="Select all rows on this page"
+                    />
+                  </th>
+                  <th data-testid="table-sort-name" data-sort-key="name">
+                    Name <span class="sort-indicator" data-sort-indicator="name"></span>
+                  </th>
+                  <th data-testid="table-sort-email" data-sort-key="email">
+                    Email <span class="sort-indicator" data-sort-indicator="email"></span>
+                  </th>
+                  <th data-testid="table-sort-role" data-sort-key="role">
+                    Role <span class="sort-indicator" data-sort-indicator="role"></span>
+                  </th>
+                  <th data-testid="table-sort-age" data-sort-key="age">
+                    Age <span class="sort-indicator" data-sort-indicator="age"></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody data-testid="table-body">
+                <!-- rows injected by table.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-pagination">
+            <button class="btn btn-secondary" type="button" data-testid="table-prev-page">
+              Prev
+            </button>
+            <span data-testid="table-page-info">Page 1 of 1</span>
+            <button class="btn btn-secondary" type="button" data-testid="table-next-page">
+              Next
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/table.js"></script>
+</body>
+</html>

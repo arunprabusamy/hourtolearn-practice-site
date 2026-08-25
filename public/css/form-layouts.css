@@ -1,0 +1,11 @@
+/* Form Layouts page - page-specific styles */
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.layout-grid .card form .form-group:last-of-type {
+  margin-bottom: 12px;
+}

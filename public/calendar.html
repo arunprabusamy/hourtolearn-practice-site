@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/calendar.css" />
+</head>
+<body data-page="calendar">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Calendar</h1>
+        <p class="page-description">Navigate months and click a day to add or remove short events, all stored in memory.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Monthly events</h2>
+          <p class="card-subtitle">Click any day to open a small form and add an event for that day.</p>
+
+          <div class="calendar-toolbar">
+            <button type="button" class="btn btn-secondary" data-testid="calendar-prev-month" aria-label="Previous month">&lsaquo; Prev</button>
+            <div class="calendar-month-label" data-testid="calendar-month-label"></div>
+            <button type="button" class="btn btn-secondary" data-testid="calendar-next-month" aria-label="Next month">Next &rsaquo;</button>
+          </div>
+
+          <div class="calendar-weekdays" data-testid="calendar-weekdays">
+            <div class="calendar-weekday">Sun</div>
+            <div class="calendar-weekday">Mon</div>
+            <div class="calendar-weekday">Tue</div>
+            <div class="calendar-weekday">Wed</div>
+            <div class="calendar-weekday">Thu</div>
+            <div class="calendar-weekday">Fri</div>
+            <div class="calendar-weekday">Sat</div>
+          </div>
+
+          <div class="calendar-grid" data-testid="calendar-grid"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/calendar.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Upload · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/file-upload.css" />
+</head>
+<body data-page="file-upload">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">File Upload</h1>
+        <p class="page-description">Select one or more files, preview them, then upload to the server.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Upload files</h2>
+          <p class="card-subtitle">Choose one or more files, then click Upload.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="file-input">Files</label>
+            <input class="form-input" type="file" id="file-input" data-testid="file-input" multiple />
+          </div>
+
+          <div id="selected-files" class="selected-files" data-testid="selected-files"></div>
+
+          <button class="btn" type="button" data-testid="upload-submit-btn">Upload</button>
+
+          <div id="upload-result" class="upload-result" data-testid="upload-result"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/file-upload.js"></script>
+</body>
+</html>

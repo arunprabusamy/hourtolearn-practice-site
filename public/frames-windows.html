@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frames &amp; Windows · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/frames-windows.css" />
+</head>
+<body data-page="frames-windows">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Frames &amp; Windows</h1>
+        <p class="page-description">Practice interacting with an iframe, a new browser tab, and a popup window.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Embedded iframe</h2>
+          <p class="card-subtitle">Use <code>page.frameLocator(...)</code> to interact with elements inside this frame.</p>
+          <iframe
+            class="embedded-frame"
+            data-testid="embedded-frame"
+            src="/iframe-content.html"
+            title="Embedded frame content"
+          ></iframe>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">New tab</h2>
+          <p class="card-subtitle">Opens the Dynamic Content page in a new browser tab.</p>
+          <a target="_blank" data-testid="open-new-tab-link" href="/dynamic-content">Open in new tab</a>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Popup window</h2>
+          <p class="card-subtitle">Opens the Tooltips page in a small popup window.</p>
+          <button class="btn" type="button" data-testid="open-popup-btn">Open popup window</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/frames-windows.js"></script>
+</body>
+</html>

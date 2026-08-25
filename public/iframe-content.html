@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frame content</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1f2430;
+      background: #ffffff;
+    }
+    input {
+      padding: 6px 10px;
+      font-size: 14px;
+      border: 1px solid #e2e5ea;
+      border-radius: 6px;
+    }
+    button {
+      margin-left: 8px;
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: #2563eb;
+      color: #fff;
+    }
+    #frame-message {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <label for="frame-input">Type something</label><br />
+  <input type="text" id="frame-input" data-testid="frame-input" />
+  <button type="button" id="frame-button" data-testid="frame-button">Show message</button>
+  <p id="frame-message" data-testid="frame-message"></p>
+
+  <script>
+    document.getElementById('frame-button').addEventListener('click', () => {
+      const value = document.getElementById('frame-input').value;
+      document.getElementById('frame-message').textContent = `Hello from inside the frame: ${value}`;
+    });
+  </script>
+</body>
+</html>

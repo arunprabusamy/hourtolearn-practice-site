@@ -1,0 +1,32 @@
+/* Table page - practice for search / sort / select / paginate */
+
+.table-search-group {
+  margin-bottom: 0;
+  min-width: 260px;
+  flex: 1;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.cell-select {
+  width: 40px;
+}
+
+.sort-indicator {
+  display: inline-block;
+  width: 10px;
+  font-size: 11px;
+  color: var(--color-primary);
+}
+
+.table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
