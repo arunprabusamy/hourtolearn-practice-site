@@ -1,0 +1,62 @@
+/* Tooltips page - hover, focus and click-triggered tooltip positioning */
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-focus-wrapper {
+  display: block;
+  max-width: 320px;
+}
+
+.tooltip-bubble {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background: var(--color-text);
+  color: #fff;
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  width: 220px;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+  z-index: 10;
+}
+
+.tooltip-bubble-below {
+  top: auto;
+  bottom: -8px;
+  transform: translate(-50%, 100%);
+  left: 0;
+  width: 260px;
+}
+
+#hover-tooltip-trigger:hover + .tooltip-bubble,
+#hover-tooltip-trigger:focus + .tooltip-bubble {
+  opacity: 1;
+  visibility: visible;
+}
+
+#focus-tooltip-input:focus + .tooltip-bubble {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-popover {
+  pointer-events: auto;
+}
+
+.tooltip-popover[hidden] {
+  display: none;
+}
+
+.tooltip-popover:not([hidden]) {
+  opacity: 1;
+  visibility: visible;
+}

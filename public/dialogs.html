@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dialogs · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/dialogs.css" />
+</head>
+<body data-page="dialogs">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Dialogs</h1>
+        <p class="page-description">Practice handling custom modals, native browser dialogs, and auto-dismissing toasts.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Custom modal dialog</h2>
+          <p class="card-subtitle">A div-based dialog rendered in the page, not a native browser dialog.</p>
+          <button type="button" class="btn" id="open-dialog-btn" data-testid="open-dialog-btn">Open dialog</button>
+          <p class="form-hint" data-testid="dialog-result">No action taken yet.</p>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Native browser dialogs</h2>
+          <p class="card-subtitle">Each button triggers a real <code>window.alert</code>, <code>confirm</code>, or <code>prompt</code>.</p>
+          <div class="dialogs-btn-row">
+            <button type="button" class="btn btn-secondary" id="native-alert-btn" data-testid="native-alert-btn">Show alert</button>
+            <button type="button" class="btn btn-secondary" id="native-confirm-btn" data-testid="native-confirm-btn">Show confirm</button>
+            <button type="button" class="btn btn-secondary" id="native-prompt-btn" data-testid="native-prompt-btn">Show prompt</button>
+          </div>
+          <p class="form-hint" data-testid="native-dialog-result">No dialog result yet.</p>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Auto-dismissing toast</h2>
+          <p class="card-subtitle">The toast removes itself from the DOM about 3 seconds after it appears.</p>
+          <button type="button" class="btn" id="show-toast-btn" data-testid="show-toast-btn">Show toast</button>
+        </div>
+      </section>
+
+      <div class="toast-region" id="toast-region"></div>
+
+      <div class="dialog-overlay" id="custom-dialog-overlay" hidden>
+        <div class="dialog-box" role="dialog" aria-modal="true" aria-labelledby="custom-dialog-title" data-testid="custom-dialog">
+          <h2 class="dialog-title" id="custom-dialog-title">Confirm action</h2>
+          <p class="dialog-body">Are you sure you want to continue with this action? This is a practice dialog with no real effect.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-secondary" id="dialog-cancel" data-testid="dialog-cancel">Cancel</button>
+            <button type="button" class="btn" id="dialog-confirm" data-testid="dialog-confirm">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/dialogs.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* Login / Account page styles */
+
+.auth-card {
+  max-width: 420px;
+}
+
+.account-card {
+  max-width: 420px;
+}
+
+.account-welcome {
+  font-size: 15px;
+  margin-bottom: 16px;
+}

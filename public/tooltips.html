@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tooltips · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/tooltips.css" />
+</head>
+<body data-page="tooltips">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Tooltips</h1>
+        <p class="page-description">Practice hover, focus, and click-triggered tooltips and popovers.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Hover tooltip</h2>
+          <p class="card-subtitle">Hover or focus the button to reveal a short tip.</p>
+          <span class="tooltip-wrapper">
+            <button type="button" class="btn btn-secondary" id="hover-tooltip-trigger" data-testid="hover-tooltip-trigger" aria-describedby="hover-tooltip-text">
+              Hover me
+            </button>
+            <span class="tooltip-bubble" id="hover-tooltip-text" data-testid="hover-tooltip-text" role="tooltip">
+              This action cannot be undone.
+            </span>
+          </span>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Focus tooltip</h2>
+          <p class="card-subtitle">Focusing the input reveals a hint about its requirements.</p>
+          <span class="tooltip-wrapper tooltip-focus-wrapper">
+            <label class="form-label" for="focus-tooltip-input">New password</label>
+            <input type="password" class="form-input" id="focus-tooltip-input" data-testid="focus-tooltip-input" aria-describedby="focus-tooltip-text" />
+            <span class="tooltip-bubble tooltip-bubble-below" id="focus-tooltip-text" data-testid="focus-tooltip-text" role="tooltip">
+              Must be at least 8 characters and include a number.
+            </span>
+          </span>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Click-triggered popover</h2>
+          <p class="card-subtitle">Click the button to toggle a panel. Click again, or click elsewhere, to close it.</p>
+          <span class="tooltip-wrapper">
+            <button type="button" class="btn btn-secondary" id="click-tooltip-trigger" data-testid="click-tooltip-trigger" aria-expanded="false">
+              Show details
+            </button>
+            <span class="tooltip-bubble tooltip-popover" id="click-tooltip-text" data-testid="click-tooltip-text" role="dialog" hidden>
+              This popover stays open until you click the trigger again or click outside of it.
+            </span>
+          </span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/tooltips.js"></script>
+</body>
+</html>

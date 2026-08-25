@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Date Picker · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/date-picker.css" />
+</head>
+<body data-page="date-picker">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Date Picker</h1>
+        <p class="page-description">A native date input and a custom-built date-range picker for practicing calendar widgets.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Native date input</h2>
+          <p class="card-subtitle">Uses the browser's built-in date picker.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="native-date">Pick a date</label>
+            <input class="form-input" type="date" id="native-date" data-testid="native-date-input" />
+          </div>
+
+          <div class="form-group">
+            <span class="form-label">Selected date</span>
+            <div class="native-date-output" data-testid="native-date-output">No date selected yet.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Custom date-range picker</h2>
+          <p class="card-subtitle">Click either field to open the month grid, pick a start and end day, then apply.</p>
+
+          <div class="form-row range-fields">
+            <div class="form-group">
+              <label class="form-label" for="range-from">From</label>
+              <input class="form-input" type="text" id="range-from" readonly data-testid="range-from-input" placeholder="Select a date" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="range-to">To</label>
+              <input class="form-input" type="text" id="range-to" readonly data-testid="range-to-input" placeholder="Select a date" />
+            </div>
+          </div>
+
+          <div class="range-popup" data-testid="range-popup" id="range-popup" hidden>
+            <div class="range-popup-header">
+              <button type="button" class="btn btn-secondary" data-testid="range-prev-month" aria-label="Previous month">&laquo;</button>
+              <div class="range-popup-title" data-testid="range-popup-title" id="range-popup-title"></div>
+              <button type="button" class="btn btn-secondary" data-testid="range-next-month" aria-label="Next month">&raquo;</button>
+            </div>
+            <div class="range-weekdays">
+              <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+            <div class="range-days" id="range-days" data-testid="range-days"></div>
+            <div class="range-popup-footer">
+              <span class="range-hint" data-testid="range-hint" id="range-hint">Pick a start day, then an end day.</span>
+              <button type="button" class="btn" data-testid="range-apply">Apply</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/date-picker.js"></script>
+</body>
+</html>

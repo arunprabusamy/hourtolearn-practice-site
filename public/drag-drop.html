@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drag &amp; Drop · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/drag-drop.css" />
+</head>
+<body data-page="drag-drop">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Drag &amp; Drop</h1>
+        <p class="page-description">
+          A small kanban board for practicing HTML5 drag and drop between columns.
+        </p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <div class="kanban-toolbar">
+            <div>
+              <h2 class="card-title">Task board</h2>
+              <p class="card-subtitle">Drag a card into another column to move it.</p>
+            </div>
+            <button class="btn btn-secondary" type="button" data-testid="kanban-reset">
+              Reset board
+            </button>
+          </div>
+
+          <div class="kanban-board">
+            <div class="kanban-column" data-testid="kanban-column-todo" data-column="todo">
+              <h3 class="kanban-column-title">To Do</h3>
+              <div class="kanban-card-list" data-dropzone data-column="todo"></div>
+            </div>
+
+            <div
+              class="kanban-column"
+              data-testid="kanban-column-in-progress"
+              data-column="in-progress"
+            >
+              <h3 class="kanban-column-title">In Progress</h3>
+              <div class="kanban-card-list" data-dropzone data-column="in-progress"></div>
+            </div>
+
+            <div class="kanban-column" data-testid="kanban-column-done" data-column="done">
+              <h3 class="kanban-column-title">Done</h3>
+              <div class="kanban-card-list" data-dropzone data-column="done"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/drag-drop.js"></script>
+</body>
+</html>

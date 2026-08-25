@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Layouts · TestCraft Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/form-layouts.css" />
+</head>
+<body data-page="form-layouts">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Form Layouts</h1>
+        <p class="page-description">Two independent forms on the same page &mdash; practice scoping locators to a container instead of matching globally.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="layout-grid">
+          <div class="card" data-testid="signin-form">
+            <h2 class="card-title">Sign in</h2>
+            <p class="card-subtitle">Quick access to your workspace.</p>
+
+            <div class="alert alert-success" data-testid="signin-success-message" hidden>Signed in successfully</div>
+
+            <form class="signin-form">
+              <div class="form-group">
+                <label class="form-label" for="signin-email">Email</label>
+                <input class="form-input" type="email" id="signin-email" name="email" data-testid="signin-email-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="signin-password">Password</label>
+                <input class="form-input" type="password" id="signin-password" name="password" data-testid="signin-password-input" />
+              </div>
+              <div class="form-checkbox-row">
+                <input type="checkbox" id="signin-remember" name="remember" data-testid="signin-remember-checkbox" />
+                <label for="signin-remember">Remember me</label>
+              </div>
+              <button type="submit" class="btn" data-testid="signin-submit-button">Sign in</button>
+            </form>
+          </div>
+
+          <div class="card" data-testid="contact-form">
+            <h2 class="card-title">Contact support</h2>
+            <p class="card-subtitle">Send a quick note to the support team.</p>
+
+            <div class="alert alert-success" data-testid="contact-success-message" hidden>Message sent successfully</div>
+
+            <form class="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Name</label>
+                <input class="form-input" type="text" id="contact-name" name="name" data-testid="contact-name-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email</label>
+                <input class="form-input" type="email" id="contact-email" name="email" data-testid="contact-email-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-message">Message</label>
+                <textarea class="form-textarea" id="contact-message" name="message" rows="3" data-testid="contact-message-textarea"></textarea>
+              </div>
+              <button type="submit" class="btn" data-testid="contact-submit-button">Send message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/form-layouts.js"></script>
+</body>
+</html>
