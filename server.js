@@ -62,8 +62,10 @@ app.get('/api/users', (req, res) => {
   const dir = sortDir === 'desc' ? -1 : 1;
 
   result = result.slice().sort((a, b) => {
-    if (a[key] < b[key]) return -1 * dir;
-    if (a[key] > b[key]) return 1 * dir;
+    const valA = typeof a[key] === 'string' ? a[key].toLowerCase() : a[key];
+    const valB = typeof b[key] === 'string' ? b[key].toLowerCase() : b[key];
+    if (valA < valB) return -1 * dir;
+    if (valA > valB) return 1 * dir;
     return 0;
   });
 
@@ -74,6 +76,25 @@ app.get('/api/users', (req, res) => {
   const data = result.slice(start, start + size);
 
   res.json({ data, total, page: pageNum, pageSize: size });
+});
+
+app.post('/api/users', (req, res) => {
+  const { name, email, role, age } = req.body || {};
+
+  if (!name || !email) {
+    return res.status(400).json({ message: 'name and email are required' });
+  }
+
+  const newUser = {
+    id: users.reduce((max, u) => Math.max(max, u.id), 0) + 1,
+    name,
+    email,
+    role: ROLES.includes(role) ? role : 'Viewer',
+    age: Number.isInteger(age) ? age : 25
+  };
+
+  users.push(newUser);
+  res.status(201).json(newUser);
 });
 
 // ---------------------------------------------------------------------------
