@@ -17,6 +17,12 @@
   var nextBtn = document.querySelector('[data-testid="table-next-page"]');
   var pageInfo = document.querySelector('[data-testid="table-page-info"]');
   var sortHeaders = document.querySelectorAll('[data-sort-key]');
+  var addUserForm = document.querySelector('[data-testid="add-user-form"]');
+  var addUserNameInput = document.querySelector('[data-testid="add-user-name-input"]');
+  var addUserEmailInput = document.querySelector('[data-testid="add-user-email-input"]');
+  var addUserRoleSelect = document.querySelector('[data-testid="add-user-role-select"]');
+  var addUserAgeInput = document.querySelector('[data-testid="add-user-age-input"]');
+  var addUserErrorMessage = document.querySelector('[data-testid="add-user-error-message"]');
 
   var searchDebounceTimer = null;
 
@@ -194,6 +200,49 @@
       state.page += 1;
       fetchAndRender();
     }
+  });
+
+  addUserForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    addUserErrorMessage.hidden = true;
+
+    var name = addUserNameInput.value.trim();
+    var email = addUserEmailInput.value.trim();
+    var age = parseInt(addUserAgeInput.value, 10);
+
+    fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        role: addUserRoleSelect.value,
+        age: isNaN(age) ? undefined : age
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (json) {
+          return { ok: res.ok, json: json };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok) {
+          addUserErrorMessage.textContent = result.json.message || 'Failed to add user';
+          addUserErrorMessage.hidden = false;
+          return;
+        }
+
+        addUserForm.reset();
+        state.q = '';
+        state.page = 1;
+        searchInput.value = '';
+        fetchAndRender();
+      })
+      .catch(function (err) {
+        console.error('Failed to add user', err);
+        addUserErrorMessage.textContent = 'Failed to add user';
+        addUserErrorMessage.hidden = false;
+      });
   });
 
   fetchAndRender();
