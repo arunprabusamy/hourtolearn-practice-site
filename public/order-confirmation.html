@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmation · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/order-confirmation.css" />
+</head>
+<body data-page="order-confirmation">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Order Confirmation</h1>
+      </header>
+
+      <nav class="store-steps" aria-label="Checkout progress" data-testid="store-steps">
+        <span class="store-step is-complete" data-testid="store-step-cart">Cart</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step is-complete" data-testid="store-step-checkout">Checkout</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step is-current" data-testid="store-step-confirmed">Confirmed</span>
+      </nav>
+
+      <section class="page-body">
+        <div class="commerce-empty-state" data-testid="order-confirmation-missing-state" hidden>
+          <div class="commerce-empty-state-title">No recent order found.</div>
+          <a class="btn" data-testid="order-confirmation-shop-link" href="/shop">Go to Shop</a>
+        </div>
+
+        <div class="card" data-testid="order-confirmation-content" hidden>
+          <div class="alert alert-success" data-testid="order-confirmation-banner">
+            Thank you! Your order has been placed.
+          </div>
+
+          <p><strong>Order number:</strong> <span data-testid="order-confirmation-order-number"></span></p>
+          <p><strong>Placed at:</strong> <span data-testid="order-confirmation-timestamp"></span></p>
+
+          <h2 class="card-title">Items</h2>
+          <div class="order-confirmation-items" data-testid="order-confirmation-items"></div>
+
+          <div class="order-confirmation-totals">
+            <div class="order-confirmation-line">
+              <span>Subtotal</span>
+              <span data-testid="order-confirmation-subtotal"></span>
+            </div>
+            <div class="order-confirmation-line">
+              <span>Tax</span>
+              <span data-testid="order-confirmation-tax"></span>
+            </div>
+            <div class="order-confirmation-line">
+              <span>Shipping</span>
+              <span data-testid="order-confirmation-shipping"></span>
+            </div>
+            <div class="order-confirmation-line order-confirmation-total">
+              <span>Total</span>
+              <span data-testid="order-confirmation-total"></span>
+            </div>
+          </div>
+
+          <h2 class="card-title">Shipping address</h2>
+          <p data-testid="order-confirmation-shipping-address"></p>
+
+          <a class="btn" data-testid="order-confirmation-continue-shopping-link" href="/shop">Continue shopping</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/order-confirmation.js"></script>
+</body>
+</html>

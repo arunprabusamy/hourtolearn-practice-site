@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/shop.css" />
+</head>
+<body data-page="shop">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Shop</h1>
+        <p class="store-page-description">
+          Search, filter and sort a server-backed product catalog, then add items to your cart.
+        </p>
+      </header>
+
+      <section class="page-body">
+        <div class="shop-hero" data-testid="shop-hero">
+          <h2 class="shop-hero-title">Everything you need, all in one place.</h2>
+          <p class="shop-hero-desc">Browse the catalog below and add your favorites to the cart.</p>
+        </div>
+
+        <div class="card">
+          <div class="shop-toolbar" data-testid="shop-toolbar">
+            <div class="form-group shop-search-group">
+              <label class="form-label" for="shop-search-input">Search products</label>
+              <input
+                class="form-input"
+                type="search"
+                id="shop-search-input"
+                data-testid="shop-search-input"
+                placeholder="Search by name, description or category..."
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="shop-category-select">Category</label>
+              <select class="form-select" id="shop-category-select" data-testid="shop-category-select">
+                <option value="all">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Home & Kitchen">Home & Kitchen</option>
+                <option value="Fitness & Outdoors">Fitness & Outdoors</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="shop-sort-select">Sort by</label>
+              <select class="form-select" id="shop-sort-select" data-testid="shop-sort-select">
+                <option value="name-asc">Name: A to Z</option>
+                <option value="name-desc">Name: Z to A</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating-desc">Rating: High to Low</option>
+              </select>
+            </div>
+            <div class="form-checkbox-row shop-in-stock-row">
+              <input type="checkbox" id="shop-in-stock-only-checkbox" data-testid="shop-in-stock-only-checkbox" />
+              <label for="shop-in-stock-only-checkbox">In stock only</label>
+            </div>
+          </div>
+
+          <p class="shop-loading" data-testid="shop-loading" role="status" aria-live="polite" hidden>Loading products...</p>
+
+          <div class="commerce-empty-state" data-testid="shop-empty-state" role="status" aria-live="polite" hidden>
+            <div class="commerce-empty-state-title">No products match your filters.</div>
+            <p>Try adjusting your search, category or in-stock filter.</p>
+          </div>
+
+          <div class="product-grid" data-testid="product-grid" role="list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-region" data-testid="shop-toast-region"></div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/shop.js"></script>
+</body>
+</html>

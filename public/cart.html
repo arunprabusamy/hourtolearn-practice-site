@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/cart.css" />
+</head>
+<body data-page="cart">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Cart</h1>
+        <p class="store-page-description">Review your items, adjust quantities, then proceed to checkout.</p>
+      </header>
+
+      <nav class="store-steps" aria-label="Checkout progress" data-testid="store-steps">
+        <span class="store-step is-current" data-testid="store-step-cart">Cart</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step" data-testid="store-step-checkout">Checkout</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step" data-testid="store-step-confirmed">Confirmed</span>
+      </nav>
+
+      <section class="page-body">
+        <div class="commerce-empty-state" data-testid="cart-empty-state" hidden>
+          <div class="commerce-empty-state-title">Your cart is empty.</div>
+          <a class="btn" data-testid="cart-empty-browse-link" href="/shop">Browse products</a>
+        </div>
+
+        <div class="card" data-testid="cart-content" hidden>
+          <div class="cart-rows" data-testid="cart-table"></div>
+
+          <div class="cart-summary">
+            <div class="cart-summary-line">
+              <span>Items</span>
+              <span data-testid="cart-item-count"></span>
+            </div>
+            <div class="cart-summary-line cart-summary-total">
+              <span>Subtotal (estimate)</span>
+              <span data-testid="cart-subtotal-amount"></span>
+            </div>
+            <p class="form-hint">Tax and shipping are calculated at checkout.</p>
+          </div>
+
+          <div class="cart-actions">
+            <a class="btn btn-secondary" data-testid="cart-continue-shopping-link" href="/shop">Continue shopping</a>
+            <a class="btn" data-testid="cart-checkout-button" href="/checkout">Proceed to checkout</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/cart.js"></script>
+</body>
+</html>

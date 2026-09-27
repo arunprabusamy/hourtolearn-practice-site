@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/checkout.css" />
+</head>
+<body data-page="checkout">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Checkout</h1>
+        <p class="store-page-description">Enter your shipping address and review your order before placing it.</p>
+      </header>
+
+      <nav class="store-steps" aria-label="Checkout progress" data-testid="store-steps">
+        <span class="store-step is-complete" data-testid="store-step-cart">Cart</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step is-current" data-testid="store-step-checkout">Checkout</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step" data-testid="store-step-confirmed">Confirmed</span>
+      </nav>
+
+      <section class="page-body">
+        <div class="commerce-empty-state" data-testid="checkout-empty-cart-state" hidden>
+          <div class="commerce-empty-state-title">Your cart is empty.</div>
+          <a class="btn" data-testid="checkout-empty-cart-browse-link" href="/shop">Browse products</a>
+        </div>
+
+        <div class="checkout-layout" data-testid="checkout-content" hidden>
+          <div class="card checkout-form-card">
+            <h2 class="card-title">Shipping address</h2>
+            <p class="form-error checkout-form-error" data-testid="checkout-form-error" hidden></p>
+
+            <form data-testid="checkout-shipping-form">
+              <div class="form-group">
+                <label class="form-label" for="checkout-fullname-input">Full name</label>
+                <input class="form-input" type="text" id="checkout-fullname-input" data-testid="checkout-fullname-input" />
+                <p class="form-error" data-testid="checkout-fullname-error" hidden>Full name is required.</p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="checkout-address1-input">Address line 1</label>
+                <input class="form-input" type="text" id="checkout-address1-input" data-testid="checkout-address1-input" />
+                <p class="form-error" data-testid="checkout-address1-error" hidden>Address line 1 is required.</p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="checkout-address2-input">Address line 2 (optional)</label>
+                <input class="form-input" type="text" id="checkout-address2-input" data-testid="checkout-address2-input" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="checkout-city-input">City</label>
+                  <input class="form-input" type="text" id="checkout-city-input" data-testid="checkout-city-input" />
+                  <p class="form-error" data-testid="checkout-city-error" hidden>City is required.</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="checkout-state-input">State / Region</label>
+                  <input class="form-input" type="text" id="checkout-state-input" data-testid="checkout-state-input" />
+                  <p class="form-error" data-testid="checkout-state-error" hidden>State / Region is required.</p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="checkout-postal-input">Postal code</label>
+                  <input class="form-input" type="text" id="checkout-postal-input" data-testid="checkout-postal-input" />
+                  <p class="form-error" data-testid="checkout-postal-error" hidden>Postal code must be at least 3 characters.</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="checkout-country-select">Country</label>
+                  <select class="form-select" id="checkout-country-select" data-testid="checkout-country-select">
+                    <option value="">Select a country</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                  </select>
+                  <p class="form-error" data-testid="checkout-country-error" hidden>Country is required.</p>
+                </div>
+              </div>
+
+              <button class="btn" type="submit" data-testid="checkout-place-order-button">Place order</button>
+              <p class="checkout-placing-order-indicator" data-testid="checkout-placing-order-indicator" hidden>Placing order...</p>
+            </form>
+          </div>
+
+          <div class="card checkout-review-card">
+            <h2 class="card-title">Order review</h2>
+            <div class="checkout-review-items" data-testid="checkout-review-items"></div>
+
+            <div class="checkout-review-totals">
+              <div class="checkout-review-line">
+                <span>Subtotal</span>
+                <span data-testid="checkout-subtotal"></span>
+              </div>
+              <div class="checkout-review-line">
+                <span>Estimated tax</span>
+                <span data-testid="checkout-tax-estimate"></span>
+              </div>
+              <div class="checkout-review-line">
+                <span>Estimated shipping</span>
+                <span data-testid="checkout-shipping-estimate"></span>
+              </div>
+              <div class="checkout-review-line checkout-review-total">
+                <span>Estimated total</span>
+                <span data-testid="checkout-total-estimate"></span>
+              </div>
+            </div>
+
+            <a class="checkout-back-link" data-testid="checkout-back-to-cart-link" href="/cart">&larr; Back to cart</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>
