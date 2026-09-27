@@ -1,0 +1,67 @@
+/* Shared widgets for the Online Purchase flow (Shop, Product Detail, Cart, Checkout, Order Confirmation) */
+
+.product-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  font-size: 40px;
+  line-height: 1;
+}
+
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty-stepper-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.qty-stepper-input {
+  width: 44px;
+  text-align: center;
+  padding: 6px 4px;
+}
+
+.toast-region {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.toast {
+  background: var(--color-text);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: var(--shadow-sm);
+}
+
+.commerce-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+}
+
+.commerce-empty-state-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.stock-badge-out {
+  background: #fef2f2;
+  color: var(--color-danger);
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Detail · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/shop-product.css" />
+</head>
+<body data-page="shop">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <a class="product-detail-back-link" data-testid="product-detail-back-link" href="/shop">&larr; Back to Shop</a>
+        <h1 class="store-page-title" data-testid="page-title">Product Detail</h1>
+      </header>
+
+      <section class="page-body">
+        <div class="commerce-empty-state" data-testid="product-detail-not-found" hidden>
+          <div class="commerce-empty-state-title">Product not found</div>
+          <p>The product you're looking for doesn't exist or may have been removed.</p>
+        </div>
+
+        <div class="card product-detail-card" data-testid="product-detail-card" hidden>
+          <div class="product-detail-layout">
+            <div class="product-image-placeholder product-detail-image" data-testid="product-detail-image"></div>
+
+            <div class="product-detail-info">
+              <h2 class="product-detail-name" data-testid="product-detail-name"></h2>
+              <span class="badge" data-testid="product-detail-category"></span>
+              <div class="product-detail-price" data-testid="product-detail-price"></div>
+              <div class="product-detail-rating" data-testid="product-detail-rating"></div>
+              <span class="badge" data-testid="product-detail-stock-badge"></span>
+              <p class="product-detail-description" data-testid="product-detail-description"></p>
+
+              <div class="product-detail-actions">
+                <div class="qty-stepper">
+                  <button class="btn btn-secondary qty-stepper-btn" type="button" data-testid="product-detail-qty-decrement" aria-label="Decrease quantity">-</button>
+                  <input class="form-input qty-stepper-input" type="number" min="1" max="10" value="1" data-testid="product-detail-qty-input" aria-label="Quantity" />
+                  <button class="btn btn-secondary qty-stepper-btn" type="button" data-testid="product-detail-qty-increment" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="btn" type="button" data-testid="product-detail-add-to-cart">Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-region" data-testid="product-detail-toast-region"></div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/shop-product.js"></script>
+</body>
+</html>

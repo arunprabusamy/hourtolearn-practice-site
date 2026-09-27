@@ -1,0 +1,136 @@
+.store-shell {
+  --store-primary: #0d9488;
+  --store-primary-hover: #0f766e;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* Give store CTAs and cards their own identity, distinct from the dashboard's
+   blue/--shadow-sm look, so the store doesn't read as a repainted dashboard page. */
+
+.store-shell .btn {
+  background: var(--store-primary);
+}
+
+.store-shell .btn:hover {
+  background: var(--store-primary-hover);
+}
+
+.store-shell .card {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+/* Header (injected via /js/store-nav-loader.js from /partials/store-nav.html) */
+
+.store-header {
+  background: #111827;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.store-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.store-brand {
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.store-nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+}
+
+.store-nav-link {
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.store-nav-link:hover {
+  color: #fff;
+}
+
+.store-nav-link.active {
+  color: #fff;
+  border-bottom: 2px solid var(--store-primary);
+  padding-bottom: 4px;
+}
+
+.store-back-link {
+  color: #94a3b8;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.store-back-link:hover {
+  color: #fff;
+}
+
+/* Main content */
+
+.store-main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+}
+
+.store-page-header {
+  margin-bottom: 24px;
+}
+
+.store-page-title {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.store-page-description {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+/* Checkout funnel progress (Cart -> Checkout -> Confirmed) */
+
+.store-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.store-step {
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.store-step.is-complete {
+  color: var(--store-primary);
+}
+
+.store-step.is-current {
+  color: var(--color-text);
+  border-bottom: 2px solid var(--store-primary);
+  padding-bottom: 2px;
+}
+
+.store-step-sep {
+  color: var(--color-border);
+}
