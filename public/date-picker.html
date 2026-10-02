@@ -24,7 +24,21 @@
 
           <div class="form-group">
             <label class="form-label" for="native-date">Pick a date</label>
-            <input class="form-input" type="date" id="native-date" data-testid="native-date-input" />
+            <div class="native-date-field">
+              <input class="form-input native-date-trigger" type="text" id="native-date" data-testid="native-date-input" placeholder="YYYY-MM-DD" readonly />
+
+              <div class="range-popup native-date-popup" data-testid="native-date-popup" id="native-date-popup" hidden>
+                <div class="range-popup-header">
+                  <button type="button" class="btn btn-secondary" data-testid="native-date-prev-month" aria-label="Previous month">&laquo;</button>
+                  <div class="range-popup-title" data-testid="native-date-popup-title" id="native-date-popup-title"></div>
+                  <button type="button" class="btn btn-secondary" data-testid="native-date-next-month" aria-label="Next month">&raquo;</button>
+                </div>
+                <div class="range-weekdays">
+                  <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                <div class="range-days" id="native-date-days" data-testid="native-date-days"></div>
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
