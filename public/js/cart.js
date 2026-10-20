@@ -6,6 +6,7 @@
   var rowsEl = document.querySelector('[data-testid="cart-table"]');
   var itemCountEl = document.querySelector('[data-testid="cart-item-count"]');
   var subtotalEl = document.querySelector('[data-testid="cart-subtotal-amount"]');
+  var checkoutBtn = document.querySelector('[data-testid="cart-checkout-button"]');
 
   function renderRow(item) {
     var row = document.createElement("div");
@@ -105,6 +106,9 @@
     emptyStateEl.hidden = true;
     contentEl.hidden = false;
 
+    // Intentionally clears and rebuilds every row on any change (quantity, remove) rather
+    // than patching the changed row in place — a stale-element lesson: anything that held
+    // onto a row/button reference from before this call is now detached from the page.
     rowsEl.innerHTML = "";
     cart.forEach(function (item) {
       rowsEl.appendChild(renderRow(item));
@@ -118,6 +122,19 @@
     itemCountEl.textContent = String(itemCount);
     subtotalEl.textContent = "$" + subtotal.toFixed(2);
   }
+
+  checkoutBtn.addEventListener("click", function () {
+    fetch("/api/store/session")
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (session) {
+        window.location.href = session.loggedIn ? "/checkout" : "/store-login?next=/checkout";
+      })
+      .catch(function () {
+        window.location.href = "/store-login?next=/checkout";
+      });
+  });
 
   render();
 })();
