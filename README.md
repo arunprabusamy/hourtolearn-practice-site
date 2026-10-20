@@ -42,6 +42,64 @@ useful for practicing authenticated session / `storageState` flows.
 On success it sets a session cookie and redirects to `/account`, a protected page that
 redirects back to `/login` if you're not authenticated.
 
+## Online Store
+
+A second practice environment, linked from the home portal (`/`), that doubles as a realistic
+end-to-end shopping flow *and* a deliberately tricky automation gauntlet — one journey
+(shop → cart → sign in → checkout → payment → confirmation → account) with hard scenarios
+built into each step, rather than a separate grab-bag of demo widgets.
+
+| Page | URL | What's tricky about it |
+|---|---|---|
+| Shop | `/shop` | A non-native category combobox (ARIA pattern, no `<select>`), a non-native max-price slider, infinite scroll instead of pagination, and a right-click/⋮-button context menu for wishlisting |
+| Product Detail | `/shop-product?id=1` | A `<product-reviews>` custom element using **open shadow DOM** — standard CSS/XPath queries won't see inside it |
+| Cart | `/cart` | Quantity/remove actions intentionally rebuild every row from scratch — anything holding a reference to an old row is now stale |
+| Sign In | `/store-login` | Four persona accounts (see below), modeled after SauceDemo's "broken app" pattern |
+| Checkout | `/checkout` | A 3-step wizard (Shipping → Verify → Payment & Review) that survives a mid-flow refresh via `sessionStorage`; a one-time code step; a payment step whose card field lives in a sandboxed iframe (`payment-widget-frame.html`, no `allow-same-origin`) bridged to the parent page via `postMessage` |
+| Account | `/store-account` | Order history in a fixed-height scrollable panel (the page itself doesn't scroll to reach it), and a `<canvas>` spending chart paired with a visually-hidden data table so assertions can target data instead of pixels |
+
+Every store page also carries a dismissible cookie-consent banner that overlaps the bottom of
+the page until handled — a click-interception scenario, not just UI flavor.
+
+### Demo accounts (password for all: `Shop123!`)
+
+- `shopper` — a normal account
+- `locked_shopper` — always locked, even with the right password (403)
+- `slow_shopper` — signs in fine, just takes about 4 seconds
+- `glitchy_shopper` — signs in fine, but this account's order totals are intentionally
+  wrong. Finding the bug by asserting on totals is the exercise — not documented further here.
+
+### Test card numbers (checkout → Payment & Review step)
+
+Sandbox mode, same convention real payment providers (Stripe, PayPal) use for test cards —
+no real payment ever occurs:
+
+- `4242 4242 4242 4242` — always succeeds immediately
+- `4000 0000 0000 0002` — always declines, no amount of retrying helps
+- `4000 0000 0000 9995` — fails twice, then succeeds on the 3rd attempt (for retry/backoff practice)
+- Any other 16-digit number — succeeds about 65% of the time, realistic non-deterministic noise
+
+### Verification codes (checkout → Verify step)
+
+After clicking "Send verification code," the current valid code is shown directly on the page
+in a labeled sandbox hint — no real SMS/email is sent. The same code is also available via
+`GET /api/test/last-otp` for anyone driving the flow purely through API calls.
+
+### Store API endpoints
+
+- `GET /api/products` — supports `q`, `category`, `sortBy`, `sortDir`, `inStockOnly`, `maxPrice`, `page`, `pageSize`
+- `GET /api/products/:id`
+- `GET /api/products/:id/reviews`, `POST /api/products/:id/reviews`
+- `POST /api/store/login`, `GET /api/store/session`, `POST /api/store/logout`
+- `POST /api/checkout/send-otp`, `POST /api/checkout/verify-otp`, `GET /api/test/last-otp`
+- `POST /api/payment/charge`
+- `POST /api/orders` — requires a logged-in session, a verified OTP, and a successful payment
+  charge; this is enforced server-side, not just by the checkout UI
+- `GET /api/orders` — the signed-in user's order history
+- `POST /api/test/reset` — resets the catalog, orders, and reviews back to seed data. Only
+  resets server-side state — it can't clear your browser's `localStorage` (cart, wishlist) or
+  `sessionStorage` (in-progress checkout step). Use an incognito window for a fully clean run.
+
 ## API endpoints used by the pages
 
 These are real endpoints (not mocked), useful for network interception / mocking exercises:

@@ -39,14 +39,28 @@
                 placeholder="Search by name, description or category..."
               />
             </div>
-            <div class="form-group">
-              <label class="form-label" for="shop-category-select">Category</label>
-              <select class="form-select" id="shop-category-select" data-testid="shop-category-select">
-                <option value="all">All Categories</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Home & Kitchen">Home & Kitchen</option>
-                <option value="Fitness & Outdoors">Fitness & Outdoors</option>
-              </select>
+            <div class="form-group shop-category-group">
+              <label class="form-label" id="shop-category-label" for="shop-category-input">Category</label>
+              <div class="combobox" data-testid="shop-category-combobox" data-value="all">
+                <input
+                  type="text"
+                  class="form-input combobox-input"
+                  id="shop-category-input"
+                  data-testid="shop-category-input"
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-controls="shop-category-listbox"
+                  aria-autocomplete="list"
+                  aria-labelledby="shop-category-label"
+                  autocomplete="off"
+                />
+                <ul class="combobox-listbox" id="shop-category-listbox" role="listbox" aria-label="Category options" data-testid="shop-category-listbox" hidden>
+                  <li class="combobox-option" id="shop-category-option-all" role="option" data-value="all" data-testid="shop-category-option-all">All Categories</li>
+                  <li class="combobox-option" id="shop-category-option-electronics" role="option" data-value="Electronics" data-testid="shop-category-option-electronics">Electronics</li>
+                  <li class="combobox-option" id="shop-category-option-home-kitchen" role="option" data-value="Home & Kitchen" data-testid="shop-category-option-home-kitchen">Home &amp; Kitchen</li>
+                  <li class="combobox-option" id="shop-category-option-fitness" role="option" data-value="Fitness & Outdoors" data-testid="shop-category-option-fitness">Fitness &amp; Outdoors</li>
+                </ul>
+              </div>
             </div>
             <div class="form-group">
               <label class="form-label" for="shop-sort-select">Sort by</label>
@@ -58,6 +72,24 @@
                 <option value="rating-desc">Rating: High to Low</option>
               </select>
             </div>
+            <div class="form-group shop-price-group">
+              <label class="form-label" id="shop-price-slider-label">Max price: <span data-testid="shop-price-slider-value">$300</span></label>
+              <div class="price-slider" data-testid="shop-price-slider" data-min="0" data-max="300" data-step="5" data-value="300">
+                <div
+                  class="price-slider-track"
+                  role="slider"
+                  tabindex="0"
+                  aria-labelledby="shop-price-slider-label"
+                  aria-valuemin="0"
+                  aria-valuemax="300"
+                  aria-valuenow="300"
+                  data-testid="shop-price-slider-track"
+                >
+                  <div class="price-slider-fill"></div>
+                  <div class="price-slider-thumb" data-testid="shop-price-slider-thumb"></div>
+                </div>
+              </div>
+            </div>
             <div class="form-checkbox-row shop-in-stock-row">
               <input type="checkbox" id="shop-in-stock-only-checkbox" data-testid="shop-in-stock-only-checkbox" />
               <label for="shop-in-stock-only-checkbox">In stock only</label>
@@ -68,10 +100,13 @@
 
           <div class="commerce-empty-state" data-testid="shop-empty-state" role="status" aria-live="polite" hidden>
             <div class="commerce-empty-state-title">No products match your filters.</div>
-            <p>Try adjusting your search, category or in-stock filter.</p>
+            <p>Try adjusting your search, category, max price or in-stock filter.</p>
           </div>
 
           <div class="product-grid" data-testid="product-grid" role="list"></div>
+          <div data-testid="shop-load-more-sentinel"></div>
+          <p class="shop-loading" data-testid="shop-infinite-loading-indicator" role="status" aria-live="polite" hidden>Loading more products...</p>
+          <p class="shop-end-of-results" data-testid="shop-end-of-results" hidden>You've reached the end of the catalog.</p>
         </div>
       </section>
     </main>
@@ -82,6 +117,10 @@
   <script src="/js/store-nav-loader.js"></script>
   <script src="/js/cart-store.js"></script>
   <script src="/js/cart-badge.js"></script>
+  <script src="/js/combobox.js"></script>
+  <script src="/js/price-slider.js"></script>
+  <script src="/js/context-menu.js"></script>
+  <script src="/js/cookie-consent.js"></script>
   <script src="/js/shop.js"></script>
 </body>
 </html>
