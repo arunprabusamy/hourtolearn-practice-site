@@ -2,17 +2,27 @@
   "use strict";
 
   var searchInput = document.querySelector('[data-testid="shop-search-input"]');
-  var categorySelect = document.querySelector('[data-testid="shop-category-select"]');
+  var categoryComboboxRoot = document.querySelector('[data-testid="shop-category-combobox"]');
   var sortSelect = document.querySelector('[data-testid="shop-sort-select"]');
+  var priceSliderRoot = document.querySelector('[data-testid="shop-price-slider"]');
   var inStockOnlyCheckbox = document.querySelector('[data-testid="shop-in-stock-only-checkbox"]');
   var loadingEl = document.querySelector('[data-testid="shop-loading"]');
+  var infiniteLoadingEl = document.querySelector('[data-testid="shop-infinite-loading-indicator"]');
+  var endOfResultsEl = document.querySelector('[data-testid="shop-end-of-results"]');
   var emptyStateEl = document.querySelector('[data-testid="shop-empty-state"]');
   var grid = document.querySelector('[data-testid="product-grid"]');
+  var sentinel = document.querySelector('[data-testid="shop-load-more-sentinel"]');
   var toastRegion = document.querySelector('[data-testid="shop-toast-region"]');
+
+  var PAGE_SIZE = 8;
 
   var qtyByProductId = {};
   var searchDebounceTimer = null;
   var toastTimer = null;
+
+  var currentPage = 1;
+  var hasMore = true;
+  var isLoading = false;
 
   function showToast(message) {
     var existing = document.querySelector('[data-testid="shop-toast-message"]');
@@ -33,6 +43,9 @@
     }, 3000);
   }
 
+  // Shared with context-menu.js so wishlist actions can show a toast too.
+  window.htlShowToast = showToast;
+
   function renderProduct(product) {
     var qty = qtyByProductId[product.id] || 1;
     var card = document.createElement("div");
@@ -46,6 +59,35 @@
     image.style.background = product.imageBg;
     image.textContent = product.emoji;
     card.appendChild(image);
+
+    var heart = document.createElement("span");
+    heart.className = "product-card-wishlist-heart";
+    heart.setAttribute("data-testid", "product-wishlist-heart-" + product.id);
+    heart.setAttribute("aria-hidden", "true");
+    heart.textContent = window.Wishlist.isWishlisted(product.id) ? "♥" : "♡";
+    heart.hidden = !window.Wishlist.isWishlisted(product.id);
+    card.appendChild(heart);
+
+    var menuBtn = document.createElement("button");
+    menuBtn.type = "button";
+    menuBtn.className = "product-card-menu-btn";
+    menuBtn.setAttribute("data-testid", "product-menu-button-" + product.id);
+    menuBtn.setAttribute("aria-label", "More actions for " + product.name);
+    menuBtn.textContent = "⋮";
+    card.appendChild(menuBtn);
+
+    window.ContextMenu.attachContextMenu(card, function () {
+      return { id: product.id, name: product.name };
+    });
+    window.ContextMenu.attachMenuButton(menuBtn, function () {
+      return { id: product.id, name: product.name };
+    });
+    window.addEventListener("wishlist:updated", function (event) {
+      if (event.detail.productId === product.id) {
+        heart.textContent = event.detail.wishlisted ? "♥" : "♡";
+        heart.hidden = !event.detail.wishlisted;
+      }
+    });
 
     var name = document.createElement("a");
     name.className = "product-card-name";
@@ -153,31 +195,52 @@
     return card;
   }
 
-  function fetchAndRender() {
+  function buildParams(page) {
     var sortValue = sortSelect.value.split("-");
-    var params = new URLSearchParams({
+    return new URLSearchParams({
       q: searchInput.value,
-      category: categorySelect.value,
+      category: categoryComboboxRoot.htlCombobox.getValue(),
       sortBy: sortValue[0],
       sortDir: sortValue[1],
-      inStockOnly: inStockOnlyCheckbox.checked ? "true" : "false"
+      inStockOnly: inStockOnlyCheckbox.checked ? "true" : "false",
+      maxPrice: String(priceSliderRoot.htlSlider.getValue()),
+      page: String(page),
+      pageSize: String(PAGE_SIZE)
     });
+  }
 
-    loadingEl.hidden = false;
-    grid.hidden = true;
-    emptyStateEl.hidden = true;
+  function loadPage(reset) {
+    if (isLoading) return;
+    if (reset) {
+      currentPage = 1;
+      hasMore = true;
+      grid.innerHTML = "";
+    }
+    if (!hasMore) return;
 
-    fetch("/api/products?" + params.toString())
+    isLoading = true;
+    if (reset) {
+      loadingEl.hidden = false;
+      grid.hidden = true;
+      emptyStateEl.hidden = true;
+      endOfResultsEl.hidden = true;
+    } else {
+      infiniteLoadingEl.hidden = false;
+    }
+
+    fetch("/api/products?" + buildParams(currentPage).toString())
       .then(function (res) {
         return res.json();
       })
       .then(function (json) {
+        isLoading = false;
         loadingEl.hidden = true;
-        grid.innerHTML = "";
+        infiniteLoadingEl.hidden = true;
 
-        if (json.data.length === 0) {
+        if (reset && json.data.length === 0) {
           emptyStateEl.hidden = false;
           grid.hidden = true;
+          hasMore = false;
           return;
         }
 
@@ -185,20 +248,59 @@
         json.data.forEach(function (product) {
           grid.appendChild(renderProduct(product));
         });
+
+        var loadedSoFar = currentPage * PAGE_SIZE;
+        if (json.data.length < PAGE_SIZE || loadedSoFar >= json.total) {
+          hasMore = false;
+          endOfResultsEl.hidden = false;
+        } else {
+          currentPage += 1;
+        }
+
+        // The IntersectionObserver callback only fires on a change in intersection
+        // state. If the sentinel was already on-screen before this page loaded and
+        // the newly appended content doesn't push it out of view (e.g. a tall
+        // viewport with few results), nothing would re-trigger the next load. Check
+        // directly and keep loading until the sentinel actually leaves the viewport.
+        if (hasMore) {
+          var rect = sentinel.getBoundingClientRect();
+          var stillVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (stillVisible) loadPage(false);
+        }
       })
       .catch(function (err) {
         console.error("Failed to load products", err);
+        isLoading = false;
         loadingEl.hidden = true;
+        infiniteLoadingEl.hidden = true;
       });
   }
 
   searchInput.addEventListener("input", function () {
     clearTimeout(searchDebounceTimer);
-    searchDebounceTimer = setTimeout(fetchAndRender, 300);
+    searchDebounceTimer = setTimeout(function () {
+      loadPage(true);
+    }, 300);
   });
-  categorySelect.addEventListener("change", fetchAndRender);
-  sortSelect.addEventListener("change", fetchAndRender);
-  inStockOnlyCheckbox.addEventListener("change", fetchAndRender);
+  categoryComboboxRoot.addEventListener("combobox:change", function () {
+    loadPage(true);
+  });
+  sortSelect.addEventListener("change", function () {
+    loadPage(true);
+  });
+  priceSliderRoot.addEventListener("slider:change", function () {
+    loadPage(true);
+  });
+  inStockOnlyCheckbox.addEventListener("change", function () {
+    loadPage(true);
+  });
 
-  fetchAndRender();
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      loadPage(false);
+    }
+  });
+  observer.observe(sentinel);
+
+  loadPage(true);
 })();
