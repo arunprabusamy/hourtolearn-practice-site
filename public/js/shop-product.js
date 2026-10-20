@@ -15,6 +15,9 @@
   var incBtn = document.querySelector('[data-testid="product-detail-qty-increment"]');
   var addBtn = document.querySelector('[data-testid="product-detail-add-to-cart"]');
   var toastRegion = document.querySelector('[data-testid="product-detail-toast-region"]');
+  var wishlistHeart = document.querySelector('[data-testid="product-detail-wishlist-heart"]');
+  var menuBtn = document.querySelector('[data-testid="product-detail-menu-button"]');
+  var reviewsWidget = document.querySelector('[data-testid="product-reviews-widget"]');
 
   var currentProduct = null;
   var toastTimer = null;
@@ -37,6 +40,9 @@
       toastTimer = null;
     }, 3000);
   }
+
+  // Shared with context-menu.js so wishlist actions can show a toast too.
+  window.htlShowToast = showToast;
 
   function setQty(newQty) {
     newQty = Math.max(1, Math.min(10, newQty));
@@ -63,6 +69,21 @@
     addBtn.disabled = !product.inStock;
     addBtn.textContent = product.inStock ? "Add to cart" : "Out of stock";
     setQty(1);
+
+    wishlistHeart.hidden = !window.Wishlist.isWishlisted(product.id);
+    window.ContextMenu.attachContextMenu(imageEl, function () {
+      return { id: product.id, name: product.name };
+    });
+    window.ContextMenu.attachMenuButton(menuBtn, function () {
+      return { id: product.id, name: product.name };
+    });
+    window.addEventListener("wishlist:updated", function (event) {
+      if (event.detail.productId === product.id) {
+        wishlistHeart.hidden = !event.detail.wishlisted;
+      }
+    });
+
+    reviewsWidget.setAttribute("product-id", String(product.id));
 
     notFoundEl.hidden = true;
     cardEl.hidden = false;

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In · HourToLearn Shop</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/store-login.css" />
+</head>
+<body data-page="store-login">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Sign In</h1>
+        <p class="store-page-description">Sign in to check out and view your order history.</p>
+      </header>
+
+      <section class="page-body">
+        <div class="card store-login-card">
+          <h2 class="card-title">Sign in</h2>
+
+          <div class="alert alert-error" data-testid="store-login-error-message" role="alert" hidden></div>
+
+          <form data-testid="store-login-form">
+            <div class="form-group">
+              <label class="form-label" for="store-login-username">Username</label>
+              <input class="form-input" type="text" id="store-login-username" data-testid="store-login-username" autocomplete="username" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="store-login-password">Password</label>
+              <input class="form-input" type="password" id="store-login-password" data-testid="store-login-password" autocomplete="current-password" />
+            </div>
+
+            <button class="btn" type="submit" data-testid="store-login-submit">Sign in</button>
+            <p class="checkout-placing-order-indicator" data-testid="store-login-loading-indicator" hidden>Signing in...</p>
+          </form>
+
+          <div class="store-login-personas" data-testid="store-login-personas">
+            <h3 class="card-subtitle">Demo accounts — password for all: <strong>Shop123!</strong></h3>
+            <ul>
+              <li><strong>shopper</strong> — a normal account</li>
+              <li><strong>locked_shopper</strong> — always locked, even with the right password</li>
+              <li><strong>slow_shopper</strong> — signs in fine, just takes about 4 seconds</li>
+              <li><strong>glitchy_shopper</strong> — signs in fine, but something about this account's order totals is off. Finding it is the exercise.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  <script src="/js/store-login.js"></script>
+</body>
+</html>
