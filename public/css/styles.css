@@ -356,3 +356,18 @@ a {
   font-size: 13px;
   color: var(--color-text-muted);
 }
+
+/* Visually hidden but still present in the DOM — for content meant to back an
+   assertion (or a screen reader) rather than be seen, e.g. the data table
+   paired with a canvas chart. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

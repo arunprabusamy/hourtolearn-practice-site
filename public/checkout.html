@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/checkout.css" />
+</head>
+<body data-page="checkout">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Checkout</h1>
+        <p class="store-page-description">Shipping, identity verification, then payment and a final review.</p>
+      </header>
+
+      <nav class="store-steps" aria-label="Checkout progress" data-testid="store-steps">
+        <span class="store-step is-complete" data-testid="store-step-cart">Cart</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step is-current" data-testid="store-step-checkout">Checkout</span>
+        <span class="store-step-sep">&rarr;</span>
+        <span class="store-step" data-testid="store-step-confirmed">Confirmed</span>
+      </nav>
+
+      <nav class="checkout-wizard-steps" aria-label="Checkout step" data-testid="checkout-wizard-steps">
+        <span class="checkout-wizard-step" data-testid="checkout-wizard-step-shipping">1. Shipping</span>
+        <span class="checkout-wizard-step" data-testid="checkout-wizard-step-verify">2. Verify</span>
+        <span class="checkout-wizard-step" data-testid="checkout-wizard-step-payment">3. Payment &amp; Review</span>
+      </nav>
+
+      <section class="page-body">
+        <div class="commerce-empty-state" data-testid="checkout-empty-cart-state" hidden>
+          <div class="commerce-empty-state-title">Your cart is empty.</div>
+          <a class="btn" data-testid="checkout-empty-cart-browse-link" href="/shop">Browse products</a>
+        </div>
+
+        <div class="commerce-empty-state" data-testid="checkout-login-required-state" hidden>
+          <div class="commerce-empty-state-title">Please sign in to continue checkout.</div>
+          <a class="btn" data-testid="checkout-login-link" href="/store-login?next=/checkout">Sign in</a>
+        </div>
+
+        <!-- Step 1: Shipping -->
+        <div class="card checkout-form-card" data-testid="checkout-step-shipping" hidden>
+          <h2 class="card-title">Shipping address</h2>
+          <p class="form-error checkout-form-error" data-testid="checkout-form-error" hidden></p>
+
+          <form data-testid="checkout-shipping-form">
+            <div class="form-group">
+              <label class="form-label" for="checkout-fullname-input">Full name</label>
+              <input class="form-input" type="text" id="checkout-fullname-input" data-testid="checkout-fullname-input" />
+              <p class="form-error" data-testid="checkout-fullname-error" hidden>Full name is required.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkout-address1-input">Address line 1</label>
+              <input class="form-input" type="text" id="checkout-address1-input" data-testid="checkout-address1-input" />
+              <p class="form-error" data-testid="checkout-address1-error" hidden>Address line 1 is required.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkout-address2-input">Address line 2 (optional)</label>
+              <input class="form-input" type="text" id="checkout-address2-input" data-testid="checkout-address2-input" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="checkout-city-input">City</label>
+                <input class="form-input" type="text" id="checkout-city-input" data-testid="checkout-city-input" />
+                <p class="form-error" data-testid="checkout-city-error" hidden>City is required.</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="checkout-state-input">State / Region</label>
+                <input class="form-input" type="text" id="checkout-state-input" data-testid="checkout-state-input" />
+                <p class="form-error" data-testid="checkout-state-error" hidden>State / Region is required.</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="checkout-postal-input">Postal code</label>
+                <input class="form-input" type="text" id="checkout-postal-input" data-testid="checkout-postal-input" />
+                <p class="form-error" data-testid="checkout-postal-error" hidden>Postal code must be at least 3 characters.</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label" id="checkout-country-label" for="checkout-country-input">Country</label>
+                <div class="combobox" data-testid="checkout-country-combobox" data-value="">
+                  <input
+                    type="text"
+                    class="form-input combobox-input"
+                    id="checkout-country-input"
+                    data-testid="checkout-country-input"
+                    role="combobox"
+                    aria-expanded="false"
+                    aria-controls="checkout-country-listbox"
+                    aria-autocomplete="list"
+                    aria-labelledby="checkout-country-label"
+                    autocomplete="off"
+                  />
+                  <ul class="combobox-listbox" id="checkout-country-listbox" role="listbox" aria-label="Country options" data-testid="checkout-country-listbox" hidden>
+                    <li class="combobox-option" id="checkout-country-option-us" role="option" data-value="United States" data-testid="checkout-country-option-us">United States</li>
+                    <li class="combobox-option" id="checkout-country-option-ca" role="option" data-value="Canada" data-testid="checkout-country-option-ca">Canada</li>
+                    <li class="combobox-option" id="checkout-country-option-uk" role="option" data-value="United Kingdom" data-testid="checkout-country-option-uk">United Kingdom</li>
+                    <li class="combobox-option" id="checkout-country-option-au" role="option" data-value="Australia" data-testid="checkout-country-option-au">Australia</li>
+                  </ul>
+                </div>
+                <p class="form-error" data-testid="checkout-country-error" hidden>Country is required.</p>
+              </div>
+            </div>
+
+            <button class="btn" type="submit" data-testid="checkout-shipping-continue-button">Continue to verification</button>
+          </form>
+        </div>
+
+        <!-- Step 2: Verify -->
+        <div class="card checkout-step-verify" data-testid="checkout-step-verify" hidden>
+          <h2 class="card-title">Verify it's you</h2>
+          <p class="card-subtitle">We'll send a one-time code to confirm it's really you before you pay.</p>
+
+          <p class="form-error" data-testid="checkout-otp-error" hidden></p>
+          <p class="form-hint" data-testid="otp-sandbox-hint" hidden>
+            Sandbox mode: your verification code is <strong data-testid="otp-sandbox-code"></strong>
+          </p>
+
+          <button class="btn btn-secondary" type="button" data-testid="checkout-send-otp-button">Send verification code</button>
+
+          <form class="checkout-otp-form" data-testid="checkout-otp-form" hidden>
+            <div class="form-group">
+              <label class="form-label" for="checkout-otp-input">6-digit code</label>
+              <input class="form-input" type="text" inputmode="numeric" maxlength="6" id="checkout-otp-input" data-testid="checkout-otp-input" />
+            </div>
+            <button class="btn" type="submit" data-testid="checkout-verify-otp-button">Verify code</button>
+            <button class="btn btn-secondary" type="button" data-testid="checkout-resend-otp-button">Resend code</button>
+          </form>
+
+          <button class="btn btn-secondary checkout-back-link" type="button" data-testid="checkout-back-to-shipping-button">&larr; Back to shipping</button>
+        </div>
+
+        <!-- Step 3: Payment & Review -->
+        <div class="checkout-layout" data-testid="checkout-step-payment" hidden>
+          <div class="card checkout-form-card">
+            <h2 class="card-title">Payment</h2>
+            <p class="form-hint" data-testid="checkout-test-card-hint">
+              Test cards — <strong>4242 4242 4242 4242</strong> always succeeds,
+              <strong>4000 0000 0000 0002</strong> always declines,
+              <strong>4000 0000 0000 9995</strong> fails twice then succeeds on retry.
+              Any other 16-digit number succeeds about 65% of the time.
+            </p>
+            <p class="form-error" data-testid="checkout-payment-error" hidden></p>
+            <p class="checkout-placing-order-indicator" data-testid="checkout-payment-retrying-indicator" hidden></p>
+            <p class="alert alert-success" data-testid="checkout-payment-confirmed-message" hidden>Payment confirmed.</p>
+
+            <iframe
+              class="payment-widget-frame"
+              data-testid="payment-widget-frame"
+              src="/payment-widget-frame.html"
+              sandbox="allow-scripts allow-forms"
+              title="Card payment widget"
+            ></iframe>
+
+            <button class="btn btn-secondary checkout-back-link" type="button" data-testid="checkout-back-to-verify-button">&larr; Back</button>
+          </div>
+
+          <div class="card checkout-review-card">
+            <h2 class="card-title">Order review</h2>
+            <div class="checkout-review-items" data-testid="checkout-review-items"></div>
+
+            <div class="checkout-review-totals">
+              <div class="checkout-review-line">
+                <span>Subtotal</span>
+                <span data-testid="checkout-subtotal"></span>
+              </div>
+              <div class="checkout-review-line">
+                <span>Estimated tax</span>
+                <span data-testid="checkout-tax-estimate"></span>
+              </div>
+              <div class="checkout-review-line">
+                <span>Estimated shipping</span>
+                <span data-testid="checkout-shipping-estimate"></span>
+              </div>
+              <div class="checkout-review-line checkout-review-total">
+                <span>Estimated total</span>
+                <span data-testid="checkout-total-estimate"></span>
+              </div>
+            </div>
+
+            <p class="form-error" data-testid="checkout-order-error" hidden></p>
+            <button class="btn" type="button" data-testid="checkout-place-order-button" disabled>Place order</button>
+            <p class="checkout-placing-order-indicator" data-testid="checkout-placing-order-indicator" hidden>Placing order...</p>
+
+            <a class="checkout-back-link" data-testid="checkout-back-to-cart-link" href="/cart">&larr; Back to cart</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/combobox.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+.store-account-logout {
+  margin-top: 4px;
+}
+
+canvas[data-testid="spending-chart"] {
+  display: block;
+  max-width: 100%;
+  margin-top: 8px;
+}
+
+/* The scroll container, not the page, is what has to be scrolled to reach a
+   buried "Reorder" button — scrollIntoView on the row alone isn't enough. */
+.order-history-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.order-history-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.order-history-row:last-child {
+  border-bottom: none;
+}
+
+.order-history-row-header {
+  min-width: 160px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.order-history-row-items {
+  flex: 1;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.order-history-row-total {
+  min-width: 70px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.order-history-reorder-btn {
+  flex-shrink: 0;
+}
