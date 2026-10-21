@@ -1,0 +1,241 @@
+/* Shared widgets for the Online Purchase flow (Shop, Product Detail, Cart, Checkout, Order Confirmation) */
+
+.product-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  font-size: 40px;
+  line-height: 1;
+}
+
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty-stepper-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.qty-stepper-input {
+  width: 44px;
+  text-align: center;
+  padding: 6px 4px;
+}
+
+.toast-region {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.toast {
+  background: var(--color-text);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: var(--shadow-sm);
+}
+
+.commerce-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+}
+
+.commerce-empty-state-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.stock-badge-out {
+  background: #fef2f2;
+  color: var(--color-danger);
+}
+
+/* Combobox (ARIA 1.2 pattern) — a non-native dropdown built from a text input + listbox */
+
+.combobox {
+  position: relative;
+}
+
+.combobox-listbox {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.combobox-option {
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.combobox-option:hover,
+.combobox-option.is-active {
+  background: var(--color-bg);
+}
+
+/* Non-native slider — value comes from pixel position or arrow keys, not a real <input type="range"> */
+
+.price-slider {
+  padding-top: 4px;
+}
+
+.price-slider-track {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-border);
+  cursor: pointer;
+}
+
+.price-slider-track:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.price-slider-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--store-primary, var(--color-primary));
+}
+
+.price-slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--store-primary, var(--color-primary));
+  border: 2px solid #fff;
+  box-shadow: var(--shadow-sm);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Context menu (right-click or "⋮" button) */
+
+.context-menu {
+  position: fixed;
+  z-index: 1000;
+  min-width: 180px;
+  padding: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.context-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.context-menu-item:hover,
+.context-menu-item:focus {
+  background: var(--color-bg);
+}
+
+/* Per-card "more actions" button and wishlist heart, shared by product cards and the product detail page */
+
+.product-card {
+  position: relative;
+}
+
+.product-card-menu-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.product-card-wishlist-heart,
+.product-detail-wishlist-heart {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 16px;
+  line-height: 1;
+  color: #ef4444;
+  user-select: none;
+}
+
+.product-detail-image {
+  position: relative;
+}
+
+/* Cookie consent banner — deliberately overlaps the bottom of the page/CTAs until dismissed */
+
+.cookie-consent-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 24px;
+  background: #111827;
+  color: #fff;
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.2);
+}
+
+.cookie-consent-text {
+  margin: 0;
+  font-size: 13px;
+  max-width: 640px;
+}
+
+.cookie-consent-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}

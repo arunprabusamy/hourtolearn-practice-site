@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice Elements · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body data-page="practice-elements">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Practice Elements</h1>
+        <p class="page-description">
+          A small set of practice pages for learning Playwright: forms, tables, dialogs,
+          drag &amp; drop, auth, uploads, and more. Pick a page from the sidebar to get started.
+        </p>
+      </header>
+
+      <section class="page-body">
+        <div class="home-grid" data-testid="home-grid">
+          <a class="home-card" data-testid="home-card-forms" href="/forms">
+            <div class="home-card-title">Forms</div>
+            <div class="home-card-desc">Text, select, checkbox, radio and validation.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-form-layouts" href="/form-layouts">
+            <div class="home-card-title">Form Layouts</div>
+            <div class="home-card-desc">Multiple independent forms on one page.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-date-picker" href="/date-picker">
+            <div class="home-card-title">Date Picker</div>
+            <div class="home-card-desc">Native date input and a custom calendar widget.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-dialogs" href="/dialogs">
+            <div class="home-card-title">Dialogs</div>
+            <div class="home-card-desc">Custom modals and native browser dialogs.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-tooltips" href="/tooltips">
+            <div class="home-card-title">Tooltips</div>
+            <div class="home-card-desc">Hover, focus and click-triggered tooltips.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-table" href="/table">
+            <div class="home-card-title">Table</div>
+            <div class="home-card-desc">Search, sort, paginate and select rows.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-drag-drop" href="/drag-drop">
+            <div class="home-card-title">Drag &amp; Drop</div>
+            <div class="home-card-desc">A small kanban board with draggable cards.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-calendar" href="/calendar">
+            <div class="home-card-title">Calendar</div>
+            <div class="home-card-desc">Click a day to add and remove events.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-login" href="/login">
+            <div class="home-card-title">Login</div>
+            <div class="home-card-desc">A real login flow for auth/session practice.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-dynamic-content" href="/dynamic-content">
+            <div class="home-card-title">Dynamic Content</div>
+            <div class="home-card-desc">Delayed elements and real network requests.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-file-upload" href="/file-upload">
+            <div class="home-card-title">File Upload</div>
+            <div class="home-card-desc">Upload one or more files to the server.</div>
+          </a>
+          <a class="home-card" data-testid="home-card-frames-windows" href="/frames-windows">
+            <div class="home-card-title">Frames &amp; Windows</div>
+            <div class="home-card-desc">An iframe, a new tab, and a popup window.</div>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+</body>
+</html>

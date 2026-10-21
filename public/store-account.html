@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account · HourToLearn Shop</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/store-shell.css" />
+  <link rel="stylesheet" href="/css/commerce-shared.css" />
+  <link rel="stylesheet" href="/css/store-account.css" />
+</head>
+<body data-page="account">
+  <div class="store-shell">
+    <div id="store-nav-container"></div>
+
+    <main class="store-main">
+      <header class="store-page-header">
+        <h1 class="store-page-title" data-testid="page-title">Account</h1>
+        <p class="store-page-description" data-testid="store-account-welcome"></p>
+      </header>
+
+      <section class="page-body">
+        <div class="commerce-empty-state" data-testid="store-account-login-required-state" hidden>
+          <div class="commerce-empty-state-title">Please sign in to view your account.</div>
+          <a class="btn" data-testid="store-account-login-link" href="/store-login?next=/store-account">Sign in</a>
+        </div>
+
+        <div data-testid="store-account-content" hidden>
+          <div class="card">
+            <h2 class="card-title">Spending overview</h2>
+            <p class="card-subtitle">Total spent per month, from your order history below.</p>
+            <canvas data-testid="spending-chart" width="600" height="220"></canvas>
+            <table class="table sr-only" data-testid="spending-chart-data-table">
+              <caption>Monthly spending totals — same data behind the chart above</caption>
+              <thead>
+                <tr><th>Month</th><th>Total spent</th></tr>
+              </thead>
+              <tbody data-testid="spending-chart-data-body"></tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title">Order history</h2>
+            <div class="order-history-scroll" data-testid="order-history-scroll-container">
+              <div data-testid="order-history-list"></div>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary store-account-logout" type="button" data-testid="store-account-logout-button">Log out</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-region" data-testid="store-account-toast-region"></div>
+
+  <script src="/js/store-nav-loader.js"></script>
+  <script src="/js/cart-store.js"></script>
+  <script src="/js/cart-badge.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  <script src="/js/spending-chart.js"></script>
+  <script src="/js/store-account.js"></script>
+</body>
+</html>
