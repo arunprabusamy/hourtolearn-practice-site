@@ -1,10 +1,13 @@
 const path = require('path');
 const crypto = require('crypto');
+const http = require('http');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
+const WebSocket = require('ws');
 
 const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -685,6 +688,88 @@ app.post('/api/test/reset', (req, res) => {
   res.json({ message: 'Store data reset to seed state.' });
 });
 
-app.listen(PORT, () => {
+// ---------------------------------------------------------------------------
+// API: order receipt download (plain-text file)
+// ---------------------------------------------------------------------------
+
+app.get('/api/orders/:orderNumber/receipt', (req, res) => {
+  const order = orders.find((o) => o.orderNumber === req.params.orderNumber);
+
+  if (!order) {
+    return res.status(404).json({ message: 'Order not found' });
+  }
+
+  const lines = [];
+  lines.push(`Receipt for ${order.orderNumber}`);
+  lines.push(`Placed at: ${order.createdAt}`);
+  lines.push('');
+  lines.push('Items:');
+  order.items.forEach((item) => {
+    lines.push(`  ${item.quantity} x ${item.name} @ $${item.unitPrice.toFixed(2)} = $${item.lineTotal.toFixed(2)}`);
+  });
+  lines.push('');
+  lines.push(`Subtotal: $${order.subtotal.toFixed(2)}`);
+  lines.push(`Tax: $${order.tax.toFixed(2)}`);
+  lines.push(`Shipping: ${order.shippingFee === 0 ? 'Free' : '$' + order.shippingFee.toFixed(2)}`);
+  lines.push(`Total: $${order.total.toFixed(2)}`);
+  lines.push('');
+  lines.push('Shipping address:');
+  const addr = order.shippingAddress;
+  lines.push(`  ${addr.fullName}`);
+  lines.push(`  ${addr.addressLine1}`);
+  if (addr.addressLine2) lines.push(`  ${addr.addressLine2}`);
+  lines.push(`  ${addr.city}, ${addr.state} ${addr.postalCode}`);
+  lines.push(`  ${addr.country}`);
+
+  res.set('Content-Type', 'text/plain');
+  res.set('Content-Disposition', `attachment; filename="${order.orderNumber}-receipt.txt"`);
+  res.send(lines.join('\n'));
+});
+
+// ---------------------------------------------------------------------------
+// WebSocket: live feed demo — server-pushed notifications/stock ticks
+// ---------------------------------------------------------------------------
+
+const wss = new WebSocket.Server({ server, path: '/ws/live-feed' });
+
+const LIVE_FEED_NOTIFICATIONS = [
+  'New order placed for Wireless Earbuds Pro',
+  'Smart Fitness Watch is back in stock',
+  'Price drop: Portable Bluetooth Speaker now $44.99',
+  'New review posted on 4K Action Camera',
+  'Flash sale starting soon on Fitness & Outdoors'
+];
+
+function buildLiveFeedPayload() {
+  if (Math.random() < 0.5) {
+    return {
+      type: 'notification',
+      message: LIVE_FEED_NOTIFICATIONS[Math.floor(Math.random() * LIVE_FEED_NOTIFICATIONS.length)],
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  const product = products[Math.floor(Math.random() * products.length)];
+  const changePercent = round2((Math.random() * 6 - 3));
+  return {
+    type: 'price-tick',
+    productId: product.id,
+    productName: product.name,
+    price: round2(product.price * (1 + changePercent / 100)),
+    changePercent,
+    timestamp: new Date().toISOString()
+  };
+}
+
+setInterval(() => {
+  const payload = JSON.stringify(buildLiveFeedPayload());
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(payload);
+    }
+  });
+}, 3000);
+
+server.listen(PORT, () => {
   console.log(`HourToLearn Practice Site running at http://localhost:${PORT}`);
 });

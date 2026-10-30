@@ -1,0 +1,33 @@
+/* Live Feed page */
+
+.live-feed-status {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.live-feed-status[data-status="open"] {
+  color: var(--color-success);
+}
+
+.live-feed-status[data-status="closed"],
+.live-feed-status[data-status="error"] {
+  color: var(--color-danger);
+}
+
+.live-feed-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.live-feed-list li {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--color-surface);
+}

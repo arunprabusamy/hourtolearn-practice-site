@@ -11,6 +11,7 @@
   var shippingEl = document.querySelector('[data-testid="order-confirmation-shipping"]');
   var totalEl = document.querySelector('[data-testid="order-confirmation-total"]');
   var addressEl = document.querySelector('[data-testid="order-confirmation-shipping-address"]');
+  var downloadReceiptLink = document.getElementById("download-receipt-link");
 
   var raw = window.sessionStorage.getItem("htl-last-order");
   var order = null;
@@ -32,6 +33,7 @@
 
   orderNumberEl.textContent = order.orderNumber;
   timestampEl.textContent = new Date(order.createdAt).toLocaleString();
+  downloadReceiptLink.href = "/api/orders/" + encodeURIComponent(order.orderNumber) + "/receipt";
 
   itemsEl.innerHTML = "";
   order.items.forEach(function (item) {

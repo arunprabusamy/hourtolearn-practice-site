@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Feed · HourToLearn Practice Site</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/live-feed.css" />
+</head>
+<body data-page="live-feed">
+  <div class="app-layout">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="page-header">
+        <h1 class="page-title" data-testid="page-title">Live Feed</h1>
+        <p class="page-description">
+          A WebSocket connection that receives server-pushed messages without any client
+          action — practice waiting on events the server initiates, not just ones you trigger.
+        </p>
+      </header>
+
+      <section class="page-body">
+        <div class="card">
+          <h2 class="card-title">Connection status</h2>
+          <p class="live-feed-status" data-testid="live-feed-status">Connecting...</p>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Incoming messages</h2>
+          <p class="card-subtitle">The server pushes a new message every few seconds.</p>
+          <ul class="live-feed-list" data-testid="live-feed-list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/nav-loader.js"></script>
+  <script src="/js/live-feed.js"></script>
+</body>
+</html>

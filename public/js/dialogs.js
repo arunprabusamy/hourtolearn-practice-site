@@ -23,6 +23,15 @@
     }
   }
 
+  function getFocusableElements() {
+    var dialogBox = overlay.querySelector(".dialog-box");
+    return Array.prototype.slice.call(
+      dialogBox.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      )
+    );
+  }
+
   openDialogBtn.addEventListener("click", openDialog);
   confirmBtn.addEventListener("click", function () {
     closeDialog("confirmed");
@@ -36,8 +45,37 @@
     }
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !overlay.hidden) {
+    if (overlay.hidden) {
+      return;
+    }
+
+    if (e.key === "Escape") {
       closeDialog("cancelled");
+      return;
+    }
+
+    if (e.key === "Tab") {
+      var focusable = getFocusableElements();
+      if (focusable.length === 0) {
+        return;
+      }
+
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      var active = document.activeElement;
+      var activeIsInsideDialog = focusable.indexOf(active) !== -1;
+
+      if (e.shiftKey) {
+        if (!activeIsInsideDialog || active === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (!activeIsInsideDialog || active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
   });
 
